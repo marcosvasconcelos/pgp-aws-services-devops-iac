@@ -5,10 +5,23 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ENV_FILE="$SCRIPT_DIR/.env"
-# TF_DIR specifies the Terraform working directory; override by setting the TF_DIR environment variable before running this script.
 TF_DIR="${TF_DIR:-$SCRIPT_DIR}"
-# Load environment variables from .env file
 source "$ENV_FILE"
+
+# check if exists .env file in the same directory
+if [ ! -f "$SCRIPT_DIR/.env" ]; then
+    echo ".env file not found in $SCRIPT_DIR"
+    echo "example .env file:"
+    echo 'region=us-east-1'
+    echo 'os_master_password=CHANGE_ME_SECURELY'
+    echo '# Optionally:'
+    echo 'docstore_bucket_name=pgp-docstore'
+    echo 'intermediary_bucket_name=pgp-event'
+    echo 'profile=default'
+    echo 'AWS_PROFILE=$profile'
+    echo 'export ENV TF_VAR_os_master_password=$os_master_password'
+    exit 1
+fi
 
 if ! command -v terraform >/dev/null 2>&1; then
     echo "terraform not found" >&2
@@ -17,7 +30,6 @@ fi
 
 if [ -f "$ENV_FILE" ]; then
     set -a
-    # shellcheck disable=SC1090
     . "$ENV_FILE"
     set +a
 else

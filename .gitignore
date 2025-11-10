@@ -22,7 +22,7 @@ crash.*.log
 *.der
 *.jks
 *.keystore
-.terraform.lock.hcl
+**/.terraform.lock.hcl
 
 # Python
 __pycache__/

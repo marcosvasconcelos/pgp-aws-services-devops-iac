@@ -1,0 +1,55 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+*.tfplan
+
+# Terraform lockfile is recommended to commit; do NOT ignore
+# .terraform.lock.hcl
+
+# Local env and secrets
+.env
+**/.env
+.env.*
+*.pem
+*.key
+*.p12
+*.crt
+*.der
+*.jks
+*.keystore
+.terraform.lock.hcl
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.tox/
+.venv/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+
+# Builds/artifacts
+*.zip
+*.jar
+dist/
+build/
+.aws-sam/
+serverless/.serverless/
+
+# Node (if present)
+node_modules/
+
+# Logs
+*.log

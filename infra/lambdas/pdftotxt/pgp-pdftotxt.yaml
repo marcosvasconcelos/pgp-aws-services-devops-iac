@@ -1,0 +1,19 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: 'AWS::Serverless-2016-10-31'
+Description: An AWS Serverless Specification template describing your function.
+Resources:
+  pdftotxt:
+    Type: 'AWS::Serverless::Function'
+    Properties:
+      Handler: lambda_function.lambda_handler
+      Runtime: python3.12
+      CodeUri: .
+      Description: ''
+      MemorySize: 512
+      Timeout: 900
+      Role: 'arn:aws:iam::138312698703:role/pgp-searchengine-lambda-exec-role'
+      Environment:
+        Variables:
+          TARGET_BUCKET: pgp-docstore-138312698703
+      Layers:
+        - 'arn:aws:lambda:us-east-1:138312698703:layer:layer-pypdf:1'
